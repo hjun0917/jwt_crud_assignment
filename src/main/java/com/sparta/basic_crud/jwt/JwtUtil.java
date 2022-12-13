@@ -1,6 +1,6 @@
 package com.sparta.basic_crud.jwt;
 
-import com.sparta.basic_crud.entity.EnumRole;
+import com.sparta.basic_crud.entity.UserRoleEnum;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
@@ -47,7 +47,7 @@ public class JwtUtil {
     }
 
     // 토큰 생성
-    public String createToken(String username, EnumRole role) {
+    public String createToken(String username, UserRoleEnum role) {
         Date date = new Date();
 
         return BEARER_PREFIX +

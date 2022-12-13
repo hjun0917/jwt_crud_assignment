@@ -1,11 +1,13 @@
 package com.sparta.basic_crud.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class UserLoginDto {
+@NoArgsConstructor
+public class UserLoginRequestDto {
     private String username;
     private String password;
 }

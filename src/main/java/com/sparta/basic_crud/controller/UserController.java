@@ -1,8 +1,8 @@
 package com.sparta.basic_crud.controller;
 
-import com.sparta.basic_crud.dto.StatusDto;
-import com.sparta.basic_crud.dto.UserLoginDto;
-import com.sparta.basic_crud.dto.UserSignupDto;
+import com.sparta.basic_crud.dto.ResponseDto;
+import com.sparta.basic_crud.dto.UserLoginRequestDto;
+import com.sparta.basic_crud.dto.UserSignupRequestDto;
 import com.sparta.basic_crud.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +19,24 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public StatusDto signup(@RequestBody UserSignupDto userSignupDto) {
-        return userService.signup(userSignupDto);
+    public ResponseDto signup(@RequestBody UserSignupRequestDto userSignupRequestDto) {
+        ResponseDto responseDto;
+        try {
+            responseDto = userService.signup(userSignupRequestDto);
+            return responseDto;
+        } catch (IllegalArgumentException e) {
+            return new ResponseDto(400,  e.getMessage());
+        }
     }
 
     @PostMapping("/login")
-    public StatusDto login(@RequestBody UserLoginDto userLoginDto, HttpServletResponse response) {
-        return userService.login(userLoginDto, response);
-
+    public ResponseDto login(@RequestBody UserLoginRequestDto userLoginRequestDto, HttpServletResponse response) {
+        ResponseDto responseDto;
+        try {
+            responseDto = userService.login(userLoginRequestDto, response);
+            return responseDto;
+            } catch (IllegalArgumentException e) {
+            return new ResponseDto(400, e.getMessage());
+        }
     }
 }
